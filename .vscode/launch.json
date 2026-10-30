@@ -1,0 +1,7 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    { "name": "collector: one crawl of the simulated shops", "type": "go", "request": "launch", "program": "${workspaceFolder}/collector/cmd/collector", "args": ["crawl", "-sites", "${workspaceFolder}/collector/sim-sites.json"] },
+    { "name": "shopsim", "type": "go", "request": "launch", "program": "${workspaceFolder}/collector/cmd/shopsim", "args": ["-catalogue", "${workspaceFolder}/data/sim/catalogue.json"] }
+  ]
+}

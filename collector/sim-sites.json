@@ -1,0 +1,11 @@
+{
+  "note": "The simulated shops served by cmd/shopsim. Closed Market is on the list on purpose: its robots.txt shuts PricewiseBot out, and the collector must respect that even for an allowlisted site.",
+  "sites": [
+    {"name": "Voltaro", "base_url": "http://127.0.0.1:9101", "rate": 50, "simulated": true},
+    {"name": "Kaufhub", "base_url": "http://127.0.0.1:9102", "rate": 50, "simulated": true},
+    {"name": "Megabyte Market", "base_url": "http://127.0.0.1:9103", "rate": 50, "simulated": true},
+    {"name": "Tienda Norte", "base_url": "http://127.0.0.1:9104", "rate": 50, "simulated": true},
+    {"name": "Nordlys Elektronik", "base_url": "http://127.0.0.1:9105", "rate": 50, "simulated": true},
+    {"name": "Closed Market", "base_url": "http://127.0.0.1:9106", "rate": 50, "simulated": true}
+  ]
+}

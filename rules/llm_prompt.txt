@@ -1,0 +1,18 @@
+Two shops list these offers. Decide whether they are the same product, so that their prices can be compared.
+
+Offer A: {a}
+Offer B: {b}
+
+How to decide:
+- Shops word titles differently: other languages, word order, extra marketing words, the shop's name, a series name one shop leaves out. None of that makes products different.
+- Units convert: 1 TB = 1000 GB, 1 l = 1000 ml. "16 GB (2x8GB)" is 16 GB.
+- A detail that only one title gives (a colour, a part number) is not a difference.
+- They are different products if both titles give the same kind of detail and it differs: another model number (SN550 vs SN750), capacity, size, colour, pack size or edition; or another brand.
+
+Examples:
+"WD Blue SN550 1TB M.2 SSD" / "Western Digital SN550 NVMe 1000GB" -> same
+"Logitech C310 Webcam" / "Logitech C920 HD Pro Webcam" -> different (C310 vs C920)
+"Kingston FURY 16GB DDR4 3200" / "Kingston FURY Beast 16 GB DDR4-3200 Kit" -> same
+"iPhone 13 128GB blue" / "Apple iPhone 13 256 GB Blau" -> different (128 vs 256 GB)
+
+Answer in JSON: a short reason, then same (true or false).

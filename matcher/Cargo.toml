@@ -1,0 +1,25 @@
+[package]
+name = "pricewise-matcher"
+version = "0.1.0"
+edition = "2024"
+description = "Pricewise matching engine: HNSW nearest neighbours over ONNX title embeddings, with normalisation rules as vetoes"
+license = "MIT"
+
+[[bin]]
+name = "pricewise-match"
+path = "src/main.rs"
+
+[dependencies]
+ort = "=2.0.0-rc.15"
+ndarray = "0.17"
+tokenizers = { version = "0.22.2", default-features = false, features = ["fancy-regex"] }
+regex = "1"
+unicode-normalization = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+postgres = "0.19"
+ureq = { version = "3", features = ["json"] }
+clap = { version = "4", features = ["derive", "env"] }
+
+[profile.release]
+debug = false

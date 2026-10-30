@@ -1,0 +1,167 @@
+{
+  "benchmark": "WDC Products, 80% corner cases, test sets (4,500 pairs each, 500 matches)",
+  "thresholds_from": "the validation split (4,500 pairs)",
+  "thresholds": {
+    "base": 0.902999997138977,
+    "tuned": 0.7929999828338623,
+    "tfidf": 0.449,
+    "tuned+rules": 0.7929999828338623
+  },
+  "scorer": {
+    "features": [
+      "cosine",
+      "token_jaccard",
+      "code_shared",
+      "quantity_shared",
+      "colour_shared"
+    ],
+    "weights": [
+      9.404141266023556,
+      -0.42947298355718416,
+      0.4835748940774313,
+      -0.19800066999726768,
+      0.5008781683033646
+    ],
+    "bias": -5.840913184788353,
+    "threshold": 0.754,
+    "borderline": [
+      0.629,
+      0.879
+    ]
+  },
+  "results": {
+    "0% unseen": {
+      "TF-IDF character n-grams (text only)": {
+        "precision": 0.243,
+        "recall": 0.4,
+        "f1": 0.302,
+        "tp": 200,
+        "fp": 624,
+        "fn": 300
+      },
+      "multilingual-e5-small, not fine-tuned": {
+        "precision": 0.224,
+        "recall": 0.6,
+        "f1": 0.327,
+        "tp": 300,
+        "fp": 1037,
+        "fn": 200
+      },
+      "fine-tuned embedder": {
+        "precision": 0.662,
+        "recall": 0.696,
+        "f1": 0.678,
+        "tp": 348,
+        "fp": 178,
+        "fn": 152
+      },
+      "fine-tuned embedder + rule vetoes": {
+        "precision": 0.684,
+        "recall": 0.694,
+        "f1": 0.689,
+        "tp": 347,
+        "fp": 160,
+        "fn": 153
+      },
+      "scorer + rule vetoes": {
+        "precision": 0.643,
+        "recall": 0.75,
+        "f1": 0.693,
+        "tp": 375,
+        "fp": 208,
+        "fn": 125
+      },
+      "rule vetoes alone, matches wrongly vetoed": 3,
+      "rule vetoes alone, non-matches vetoed": 883
+    },
+    "50% unseen": {
+      "TF-IDF character n-grams (text only)": {
+        "precision": 0.272,
+        "recall": 0.586,
+        "f1": 0.371,
+        "tp": 293,
+        "fp": 785,
+        "fn": 207
+      },
+      "multilingual-e5-small, not fine-tuned": {
+        "precision": 0.256,
+        "recall": 0.744,
+        "f1": 0.381,
+        "tp": 372,
+        "fp": 1081,
+        "fn": 128
+      },
+      "fine-tuned embedder": {
+        "precision": 0.566,
+        "recall": 0.7,
+        "f1": 0.626,
+        "tp": 350,
+        "fp": 268,
+        "fn": 150
+      },
+      "fine-tuned embedder + rule vetoes": {
+        "precision": 0.638,
+        "recall": 0.694,
+        "f1": 0.665,
+        "tp": 347,
+        "fp": 197,
+        "fn": 153
+      },
+      "scorer + rule vetoes": {
+        "precision": 0.579,
+        "recall": 0.744,
+        "f1": 0.651,
+        "tp": 372,
+        "fp": 271,
+        "fn": 128
+      },
+      "rule vetoes alone, matches wrongly vetoed": 5,
+      "rule vetoes alone, non-matches vetoed": 824
+    },
+    "100% unseen": {
+      "TF-IDF character n-grams (text only)": {
+        "precision": 0.225,
+        "recall": 0.578,
+        "f1": 0.324,
+        "tp": 289,
+        "fp": 996,
+        "fn": 211
+      },
+      "multilingual-e5-small, not fine-tuned": {
+        "precision": 0.271,
+        "recall": 0.718,
+        "f1": 0.393,
+        "tp": 359,
+        "fp": 967,
+        "fn": 141
+      },
+      "fine-tuned embedder": {
+        "precision": 0.483,
+        "recall": 0.636,
+        "f1": 0.549,
+        "tp": 318,
+        "fp": 340,
+        "fn": 182
+      },
+      "fine-tuned embedder + rule vetoes": {
+        "precision": 0.562,
+        "recall": 0.63,
+        "f1": 0.594,
+        "tp": 315,
+        "fp": 245,
+        "fn": 185
+      },
+      "scorer + rule vetoes": {
+        "precision": 0.514,
+        "recall": 0.714,
+        "f1": 0.598,
+        "tp": 357,
+        "fp": 337,
+        "fn": 143
+      },
+      "rule vetoes alone, matches wrongly vetoed": 4,
+      "rule vetoes alone, non-matches vetoed": 790
+    }
+  },
+  "seconds": 84
+}

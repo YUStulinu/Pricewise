@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "fetch data and models", "type": "shell", "command": "bash scripts/fetch-data.sh", "problemMatcher": [] },
+    { "label": "start the database", "type": "shell", "command": "docker compose up -d", "problemMatcher": [] },
+    { "label": "run the whole demo", "type": "shell", "command": "bash scripts/demo.sh", "problemMatcher": [] },
+    { "label": "dashboard (dev)", "type": "shell", "command": "npm run dev", "options": { "cwd": "${workspaceFolder}/dashboard" }, "isBackground": true, "problemMatcher": [] },
+    { "label": "Go tests", "type": "shell", "command": "go test ./...", "options": { "cwd": "${workspaceFolder}/collector" }, "group": "test", "problemMatcher": [] },
+    { "label": "Rust tests", "type": "shell", "command": "cargo test --release", "options": { "cwd": "${workspaceFolder}/matcher" }, "group": "test", "problemMatcher": [] },
+    { "label": "Python tests", "type": "shell", "command": ".venv/Scripts/python -m pytest -q", "options": { "cwd": "${workspaceFolder}/ml" }, "group": "test", "problemMatcher": [] },
+    { "label": "dashboard tests", "type": "shell", "command": "npx vitest run", "options": { "cwd": "${workspaceFolder}/dashboard" }, "group": "test", "problemMatcher": [] }
+  ]
+}

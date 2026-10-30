@@ -1,0 +1,14 @@
+{
+  "offers": 1000,
+  "products found": 500,
+  "true products": 500,
+  "pairs grouped": 744,
+  "true pairs": 500,
+  "precision": 0.434,
+  "recall": 0.646,
+  "f1": 0.519,
+  "offers by how they were matched": {
+    "model": 826,
+    "single": 174
+  }
+}

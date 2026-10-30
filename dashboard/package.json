@@ -1,0 +1,25 @@
+{
+  "name": "pricewise-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev -p 3020",
+    "build": "next build",
+    "start": "next start -p 3020",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "pg": "8.23.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/pg": "8.23.1",
+    "@types/react": "19.3.0",
+    "typescript": "5.9.3",
+    "vitest": "5.0.5"
+  }
+}

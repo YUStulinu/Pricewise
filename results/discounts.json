@@ -1,0 +1,101 @@
+{
+  "data": "prices collected by the Go collector from the simulated shops over 120 days; truth from the simulation",
+  "summary": {
+    "Omnibus 30-day rule alone": {
+      "fake discounts caught": "158/210",
+      "recall": 0.752,
+      "by kind": {
+        "inflate_then_drop": 1.0,
+        "long_inflation": 0.0,
+        "never_charged": 1.0
+      },
+      "genuine discounts flagged (false alarms)": "0/229",
+      "precision": 1.0
+    },
+    "full detector": {
+      "fake discounts caught": "201/210",
+      "recall": 0.957,
+      "by kind": {
+        "inflate_then_drop": 1.0,
+        "long_inflation": 0.827,
+        "never_charged": 1.0
+      },
+      "genuine discounts flagged (false alarms)": "0/229",
+      "precision": 1.0
+    }
+  },
+  "events": {
+    "long_inflation": {
+      "events": 52,
+      "unchecked": 0,
+      "flagged_by_omnibus_rule": 0,
+      "flagged_by_full_detector": 43,
+      "flag inflate_then_drop": 43,
+      "not_seen": 0
+    },
+    "inflate_then_drop": {
+      "events": 95,
+      "unchecked": 0,
+      "flagged_by_omnibus_rule": 95,
+      "flagged_by_full_detector": 95,
+      "flag inflate_then_drop": 90,
+      "flag above_30_day_low": 95,
+      "not_seen": 0
+    },
+    "genuine": {
+      "events": 230,
+      "unchecked": 0,
+      "flagged_by_omnibus_rule": 0,
+      "flagged_by_full_detector": 0,
+      "not_seen": 1
+    },
+    "never_charged": {
+      "events": 63,
+      "unchecked": 0,
+      "flagged_by_omnibus_rule": 63,
+      "flagged_by_full_detector": 63,
+      "flag above_30_day_low": 63,
+      "flag never_charged": 63,
+      "flag inflate_then_drop": 1,
+      "not_seen": 0
+    }
+  },
+  "claims not matching any simulated event": {},
+  "missed or wrong, examples": {
+    "long_inflation": [
+      {
+        "url": "http://127.0.0.1:9101/p/0-9932421",
+        "event": {
+          "kind": "long_inflation",
+          "fake": true,
+          "start": "2026-09-04",
+          "end": "2026-09-16",
+          "raised_from": "2026-07-23"
+        },
+        "flags": []
+      },
+      {
+        "url": "http://127.0.0.1:9101/p/0-95170662",
+        "event": {
+          "kind": "long_inflation",
+          "fake": true,
+          "start": "2026-07-15",
+          "end": "2026-07-28",
+          "raised_from": "2026-06-08"
+        },
+        "flags": []
+      },
+      {
+        "url": "http://127.0.0.1:9102/p/1-53262633",
+        "event": {
+          "kind": "long_inflation",
+          "fake": true,
+          "start": "2026-07-19",
+          "end": "2026-07-29",
+          "raised_from": "2026-06-08"
+        },
+        "flags": []
+      }
+    ]
+  }
+}

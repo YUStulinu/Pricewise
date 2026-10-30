@@ -1,0 +1,8 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/ml/.venv/Scripts/python.exe",
+  "python.testing.pytestEnabled": true,
+  "python.testing.cwd": "${workspaceFolder}/ml",
+  "rust-analyzer.linkedProjects": ["matcher/Cargo.toml"],
+  "go.toolsEnvVars": { "GOFLAGS": "" },
+  "search.exclude": { "third_party": true, "data": true, "models": true, "**/node_modules": true, "matcher/target": true, "dashboard/.next": true }
+}

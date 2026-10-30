@@ -1,0 +1,19 @@
+# PostgreSQL 17 with TimescaleDB for Pricewise. The schema is created on first start.
+services:
+  db:
+    image: timescale/timescaledb:2.31.0-pg17
+    environment:
+      POSTGRES_USER: pricewise
+      POSTGRES_PASSWORD: pricewise
+      POSTGRES_DB: pricewise
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/10-schema.sql:ro
+      - pricewise-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pricewise -d pricewise"]
+      interval: 2s
+      retries: 30
+volumes:
+  pricewise-db:

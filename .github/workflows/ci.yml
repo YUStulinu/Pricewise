@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  collector:
+    # robots.txt rules, the per-host token bucket, JSON-LD extraction, and whole crawls of
+    # simulated shops (politeness, 429 handling, every markup variant).
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: collector
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: collector/go.mod
+          cache-dependency-path: collector/go.sum
+      - run: go vet ./...
+      - run: go test -race ./...
+        if: runner.os == 'Linux'
+      - run: go test ./...
+        if: runner.os == 'Windows'
+
+  matcher:
+    # The normalisation rules (the same cases as Python), HNSW recall against exact search, grouping.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: matcher
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: matcher
+      - run: cargo test --release
+
+  ml:
+    # The normalisation rules and the fake-discount detector.
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ml
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - run: pip install numpy==2.5.4 pytest==9.2.0
+      - run: python -m pytest -q
+
+  dashboard:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dashboard
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+      - run: npm ci
+      - run: npx vitest run
+      - run: npx tsc --noEmit
+      - run: npm run build
+
+  integration:
+    # TimescaleDB with the real schema, the simulated shops (made-up products), the collector
+    # replaying 120 days, then the detector: checks robots.txt was obeyed and fakes were caught.
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: timescale/timescaledb:2.31.0-pg17
+        env:
+          POSTGRES_USER: pricewise
+          POSTGRES_PASSWORD: pricewise
+          POSTGRES_DB: pricewise
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U pricewise -d pricewise" --health-interval 2s --health-retries 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: collector/go.mod
+          cache-dependency-path: collector/go.sum
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - run: PGPASSWORD=pricewise psql -h 127.0.0.1 -p 5433 -U pricewise -d pricewise -v ON_ERROR_STOP=1 -f db/schema.sql
+      - run: cd collector && go build -o ../bin/ ./cmd/...
+      - run: pip install numpy==2.5.4 "psycopg[binary]==3.3.2"
+      - run: |
+          bin/shopsim -catalogue ml/tests/fixtures/catalogue.json &
+          sleep 1
+          bin/collector replay -sites collector/sim-sites.json
+          cd ml
+          python -m pricewise_ml.analyse
+          python -m pricewise_ml.evaluate_discounts --catalogue tests/fixtures/catalogue.json --out ../ci-discounts.json
+          python ../scripts/integration-check.py ../ci-discounts.json

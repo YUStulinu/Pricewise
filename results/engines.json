@@ -1,0 +1,78 @@
+{
+  "0% unseen": {
+    "pairs": 4500,
+    "max cosine difference (ONNX in Rust vs PyTorch)": 1.1920928955078125e-06,
+    "same veto decision": 1.0,
+    "same match decision": 1.0,
+    "Rust engine": {
+      "precision": 0.643,
+      "recall": 0.75,
+      "f1": 0.693,
+      "tp": 375,
+      "fp": 208,
+      "fn": 125
+    },
+    "Python": {
+      "precision": 0.643,
+      "recall": 0.75,
+      "f1": 0.693,
+      "tp": 375,
+      "fp": 208,
+      "fn": 125
+    },
+    "Rust seconds for all pairs (CPU, embeddings included)": 114.0
+  },
+  "100% unseen": {
+    "pairs": 4500,
+    "max cosine difference (ONNX in Rust vs PyTorch)": 1.3113021850585938e-06,
+    "same veto decision": 1.0,
+    "same match decision": 1.0,
+    "Rust engine": {
+      "precision": 0.514,
+      "recall": 0.714,
+      "f1": 0.598,
+      "tp": 357,
+      "fp": 337,
+      "fn": 143
+    },
+    "Python": {
+      "precision": 0.514,
+      "recall": 0.714,
+      "f1": 0.598,
+      "tp": 357,
+      "fp": 337,
+      "fn": 143
+    },
+    "Rust seconds for all pairs (CPU, embeddings included)": 96.5
+  },
+  "hnsw": {
+    "exact_microseconds_per_query": 2682.4142979452054,
+    "hnsw": [
+      {
+        "ef": 16,
+        "microseconds_per_query": 119.18005136986301,
+        "recall_at_10": 0.9997431506849315
+      },
+      {
+        "ef": 32,
+        "microseconds_per_query": 192.4042808219178,
+        "recall_at_10": 0.9999143835616439
+      },
+      {
+        "ef": 64,
+        "microseconds_per_query": 323.96104452054794,
+        "recall_at_10": 1.0
+      },
+      {
+        "ef": 128,
+        "microseconds_per_query": 572.9369006849315,
+        "recall_at_10": 1.0
+      }
+    ],
+    "queries": 1168,
+    "seconds_build": 7.0391161,
+    "seconds_embedding": 63.32854,
+    "titles": 5837,
+    "titles_per_second": 92.17013371854144
+  }
+}

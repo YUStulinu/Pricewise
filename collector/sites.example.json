@@ -1,0 +1,11 @@
+{
+  "note": "The allowlist for real shops. Add a shop only after reading its terms of use and finding that they allow automated price collection; record who checked and when. The collector refuses a real site without terms_checked, and still obeys its robots.txt.",
+  "sites": [
+    {
+      "name": "Example Shop",
+      "base_url": "https://shop.example",
+      "rate": 0.5,
+      "terms_checked": {"by": "", "on": "", "note": "link to the terms and the clause that allows it"}
+    }
+  ]
+}
